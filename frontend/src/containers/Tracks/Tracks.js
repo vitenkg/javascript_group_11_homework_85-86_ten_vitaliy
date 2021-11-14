@@ -10,6 +10,9 @@ const useStyles = makeStyles({
     margin: {
         marginBottom: "15px",
     },
+    endButton: {
+        alignSelf: "flex-end",
+    }
 })
 
 const Tracks = () => {
@@ -26,17 +29,17 @@ const Tracks = () => {
         }
     }, [dispatch]);
 
-    console.log(tracks);
     return (
         <>
             <Grid container direction="column" spacing={2}>
                 <Grid item container justifyContent="space-between" alignItems="center">
                     <Grid item>
-                        <Typography variant="h4">{tracks && paramsURL.get('artist') ? paramsURL.get('artist') : "All"}</Typography>
-                        <Typography variant="h4">{tracks ? tracks[0].album.name : Tracks}</Typography>
+                        <Typography
+                            variant="h4">{tracks && paramsURL.get('artist') ? paramsURL.get('artist') : "All"}</Typography>
+                        <Typography variant="h4">{tracks && (tracks.length> 0) ? tracks[0].album.name : Tracks}</Typography>
                     </Grid>
                     <Grid item>
-                        <Button coloe="primary">Add Track</Button>
+                        <Button color="primary">Add Track</Button>
                     </Grid>
                 </Grid>
             </Grid>
@@ -54,6 +57,7 @@ const Tracks = () => {
                                 <Typography variant="body1">Название альбома: {track.name}</Typography>
                                 <Typography variant="body1">Длина трека: {track.lasting}</Typography>
                             </Grid>
+                            <Grid item className={classes.endButton}><Button>Play</Button></Grid>
                         </Grid>
                     </Paper>
                 )))}

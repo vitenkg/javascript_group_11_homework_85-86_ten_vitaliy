@@ -1,6 +1,9 @@
-import React from 'react';
-import {Avatar, Button, Container, Grid, makeStyles, TextField, Typography} from "@material-ui/core";
+import React, {useState} from 'react';
+import {Avatar, Button, Container, Grid, Link, makeStyles, TextField, Typography} from "@material-ui/core";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import {registerUser} from "../../store/Actions/usersActions";
+import {useDispatch, useSelector} from "react-redux";
+import {Link as RouterLink} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -23,32 +26,32 @@ const useStyles = makeStyles(theme => ({
 
 const Register = () => {
   const classes = useStyles();
-  // const dispatch = useDispatch();
-  // const error = useSelector(state => state.users.registerError);
-  //
-  // const [user, setUser] = useState({
-  //   username: '',
-  //   password: '',
-  // });
-  //
-  // const inputChangeHandler = e => {
-  //   const {name, value} = e.target;
-  //
-  //   setUser(prevState => ({...prevState, [name]: value}));
-  // };
-  //
-  // const submitFormHandler = e => {
-  //   e.preventDefault();
-  //   dispatch(registerUser({...user}));
-  // };
-  //
-  // const getFieldError = fieldName => {
-  //   try {
-  //     return error.errors[fieldName].message;
-  //   } catch (e) {
-  //     return undefined;
-  //   }
-  // };
+  const dispatch = useDispatch();
+  const error = useSelector(state => state.users.registerError);
+
+  const [user, setUser] = useState({
+    username: '',
+    password: '',
+  });
+
+  const inputChangeHandler = e => {
+    const {name, value} = e.target;
+
+    setUser(prevState => ({...prevState, [name]: value}));
+  };
+
+  const submitFormHandler = e => {
+    e.preventDefault();
+    dispatch(registerUser({...user}));
+  };
+
+  const getFieldError = fieldName => {
+    try {
+      return error.errors[fieldName].message;
+    } catch (e) {
+      return undefined;
+    }
+  };
 
   return (
     <Container component="section" maxWidth="xs">
@@ -63,7 +66,7 @@ const Register = () => {
           component="form"
           container
           className={classes.form}
-          // onSubmit={submitFormHandler}
+          onSubmit={submitFormHandler}
           spacing={2}
         >
           <Grid item xs={12}>
@@ -71,10 +74,10 @@ const Register = () => {
               autoComplete="off"
               label="Username"
               name="username"
-              // value={user.username}
-              // onChange={inputChangeHandler}
-              // error={Boolean(getFieldError('username'))}
-              // helperText={getFieldError('username')}
+              value={user.username}
+              onChange={inputChangeHandler}
+              error={Boolean(getFieldError('username'))}
+              helperText={getFieldError('username')}
             />
           </Grid>
 
@@ -83,10 +86,10 @@ const Register = () => {
               type="password"
               label="Password"
               name="password"
-              // value={user.password}
-              // onChange={inputChangeHandler}
-              // error={Boolean(getFieldError('password'))}
-              // helperText={getFieldError('password')}
+              value={user.password}
+              onChange={inputChangeHandler}
+              error={Boolean(getFieldError('password'))}
+              helperText={getFieldError('password')}
             />
           </Grid>
 
@@ -103,9 +106,9 @@ const Register = () => {
           </Grid>
 
           <Grid item container justifyContent="flex-end">
-            {/*<Link component={RouterLink} variant="body2" to="/login">*/}
-            {/*  Already have an account? Sign in*/}
-            {/*</Link>*/}
+            <Link component={RouterLink} variant="body2" to="/login">
+              Already have an account? Sign in
+            </Link>
           </Grid>
         </Grid>
       </div>

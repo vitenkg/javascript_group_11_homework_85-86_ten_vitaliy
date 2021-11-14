@@ -43,7 +43,7 @@ const Albums = () => {
                 <Grid item container justifyContent="space-between" alignItems="center">
                     <Grid item>
                         <Typography
-                            variant="h4">{paramsURL.get('artist') && albums ? albums[0].artist.name : "All"}</Typography>
+                            variant="h4">{paramsURL.get('artist') && albums && (albums.length > 0)? albums[0].artist.name : "All"}</Typography>
                     </Grid>
                     <Grid item>
                         <Button coloe="primary">Add Album</Button>
