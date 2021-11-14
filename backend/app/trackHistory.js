@@ -1,35 +1,31 @@
-const User = require("../models/User");
-const Track = require("../models/Track");
 const History = require("../models/TrackHistory");
 const express = require("express");
 const dayjs = require('dayjs');
+const auth = require("../middleware/auth");
 
 const router = express.Router();
 
-router.post('/', async (req,res) => {
-    const token = req.get('Authorization');
+router.get('/', auth, async (req, res) => {
+    const history = await History.find(req.user._id).populate('track', 'name');
 
-    if (!req.body.track) {
-        return res.status(400).send('Data Not valid');
+    try {
+        res.send(history);
+    } catch (e) {
+        res.status(500).send(e);
     }
+})
 
-    if (!token) {
-        return res.status(401).send({error: "No token present"});
-    }
-
-    const user = await User.findOne({token});
-
-    if (!user) {
-        return res.status(401).send({error: "Wrong token"});
-    }
-
+router.post('/', auth, async (req, res) => {
     const date = dayjs(new Date());
+
+    // const track = await Track.find({_id: req.body.track});
 
     const historyData = {
         datetime: date,
         track: req.body.track,
-        user: user._id,
+        user: req.user._id,
     }
+    console.log(historyData);
 
     const history = new History(historyData);
 
