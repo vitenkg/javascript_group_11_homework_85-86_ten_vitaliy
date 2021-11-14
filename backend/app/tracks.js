@@ -9,19 +9,19 @@ router.get('/', async (req, res) => {
         const query = {};
         if (req.query.album) {
             query.album = req.query.album;
-            const tracks = await Track.find(query).populate('album', 'name artist');
+            let tracks = await Track.find(query).populate('album');
             return res.send(tracks);
         }
 
         if (req.query.artist) {
             let allTracks = [];
             query.artist = req.query.artist;
-            const albums = await Albums.find(query).populate('artist', 'name artist');
+            const albums = await Albums.find(query).populate('artist', 'name');
 
             for (let i = 0; i < albums.length; i++) {
                 const queryAlbum = {};
                 queryAlbum.album = albums[i]._id;
-                const tracks = await Track.find(queryAlbum).populate('album', 'name artist')
+                const tracks = await Track.find(queryAlbum).populate('album', 'name')
                 allTracks = allTracks.concat(tracks);
             }
 

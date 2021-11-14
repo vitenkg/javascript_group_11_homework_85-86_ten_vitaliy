@@ -30,21 +30,6 @@ router.get('/', async (req, res) => {
         }
 
         const albums = await Album.find(query).populate('artist', 'name').sort({"year": 1});
-        // const albumTrackCount = albums.map(album => {
-        //     const countFunction = async () => {
-        //         const count = await Track.find(album._id).count();
-        //         console.log(count);
-        //         console.log(album._id);
-        //         // return await count;
-        //     };
-        //     const count = countFunction();
-        //     console.log(count);
-        //     return {...album._doc, count};
-        // });
-
-        // console.log(albumTrackCount);
-
-
         res.send(albums);
     } catch (e) {
         res.sendStatus(500);
