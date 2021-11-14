@@ -67,19 +67,31 @@ export const fetchAlbums = id => {
     };
 };
 
-export const fetchTracks = id => {
+export const fetchTracks = (id, token) => {
     return async dispatch => {
         let response = null;
         try {
             dispatch(fetchTracksRequest());
             if (id) {
-                response = await axiosApi.get('/tracks?album=' + id);
+                response = await axiosApi.get('/tracks?album=' + id, {
+                    headers: {
+                        'Authorization': token,
+                    }
+                });
             } else {
                 response = await axiosApi.get('/tracks');
             }
             dispatch(fetchTracksSuccess(response.data));
         } catch (e) {
             dispatch(fetchTracksFailure());
+            if (e.response.status === 401) {
+                toast.warning('You are not authorized');
+            } else {
+                toast.error('Could not fount tracks', {
+                    theme: 'colored',
+                    icon: <WarningIcon/>,
+                });
+            }
         }
     };
 };

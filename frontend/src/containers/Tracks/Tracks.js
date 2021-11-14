@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Box, Button, Grid, makeStyles, Paper, Typography} from "@material-ui/core";
 import {fetchTracks} from "../../store/Actions/mainActions";
+import {Redirect} from "react-router-dom";
 
 const useStyles = makeStyles({
     text: {
@@ -19,16 +20,25 @@ const useStyles = makeStyles({
 const Tracks = () => {
     const dispatch = useDispatch();
     const tracks = useSelector(state => state.main.tracks);
+    const token = useSelector(state => state.users.user);
     const paramsURL = new URLSearchParams(document.location.search.substring(1));
     const classes = useStyles();
 
     useEffect(() => {
-        if (paramsURL.get('album')) {
-            dispatch(fetchTracks(paramsURL.get('album')));
+        if (paramsURL.get('album') && token) {
+            dispatch(fetchTracks(paramsURL.get('album'), token.token));
         } else {
             dispatch(fetchTracks());
         }
     }, [dispatch]);
+
+    const buttonHandler = id => {
+        console.log(id);
+    };
+
+    if (!token) {
+        return <Redirect to={'/login'}/>
+    }
 
     return (
         <>
@@ -57,7 +67,14 @@ const Tracks = () => {
                                 <Typography variant="body1">Название альбома: {track.name}</Typography>
                                 <Typography variant="body1">Длина трека: {track.lasting}</Typography>
                             </Grid>
-                            <Grid item className={classes.endButton}><Button>Play</Button></Grid>
+                            <Grid item className={classes.endButton}>
+                                <Button
+                                    type="button"
+                                    onClick={() => buttonHandler(track._id)}
+                                >
+                                    Play
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Paper>
                 )))}

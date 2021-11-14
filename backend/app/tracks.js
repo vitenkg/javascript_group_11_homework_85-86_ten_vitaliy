@@ -1,10 +1,11 @@
 const express = require('express');
 const Track = require('../models/Track');
 const Albums = require('../models/Album');
+const auth = require("../middleware/auth");
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
     try {
         const query = {};
         if (req.query.album) {

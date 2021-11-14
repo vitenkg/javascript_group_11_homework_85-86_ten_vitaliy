@@ -2,13 +2,14 @@ const User = require("../models/User");
 const Track = require("../models/Track");
 const History = require("../models/TrackHistory");
 const express = require("express");
+const dayjs = require('dayjs');
 
 const router = express.Router();
 
 router.post('/', async (req,res) => {
     const token = req.get('Authorization');
 
-    if (!req.body.trackId) {
+    if (!req.body.track) {
         return res.status(400).send('Data Not valid');
     }
 
@@ -22,11 +23,11 @@ router.post('/', async (req,res) => {
         return res.status(401).send({error: "Wrong token"});
     }
 
-    const date = new Date();
+    const date = dayjs(new Date());
 
     const historyData = {
         datetime: date,
-        track: req.body.trackId,
+        track: req.body.track,
         user: user._id,
     }
 
