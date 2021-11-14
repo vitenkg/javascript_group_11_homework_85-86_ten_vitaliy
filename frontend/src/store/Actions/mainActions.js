@@ -1,4 +1,3 @@
-// import {NotificationManager} from "react-notifications";
 import {toast} from "react-toastify";
 import WarningIcon from '@material-ui/icons/Warning';
 import axiosApi from "../../axiosApi";
@@ -43,7 +42,6 @@ export const fetchArtists = () => {
             dispatch(fetchMainSuccess(response.data));
         } catch (e) {
             dispatch(fetchMainFailure());
-            // NotificationManager.error('Could not fetch products!');
             toast.error('Could not fetch products!', {
                 theme: 'colored',
                 icon: <WarningIcon/>

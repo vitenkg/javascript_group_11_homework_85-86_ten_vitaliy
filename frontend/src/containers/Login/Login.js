@@ -25,14 +25,17 @@ const useStyles = makeStyles(theme => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    alert: {
+        marginTop: theme.spacing(3),
+        width: "100%",
+    },
 }));
-
 
 const Login = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const error = useSelector(state => state.users.loginError);
-    const loginIn = useSelector(state => state.users.loadingLogin);
+    const loginIn = useSelector(state => state.users.loginLoading);
     const [user, setUser] = useState({
         username: '',
         password: '',
@@ -48,7 +51,6 @@ const Login = () => {
         e.preventDefault();
         dispatch(fetchLogin({...user}));
     };
-
     return (
         <Container component="section" maxWidth="xs">
             <div className={classes.paper}>

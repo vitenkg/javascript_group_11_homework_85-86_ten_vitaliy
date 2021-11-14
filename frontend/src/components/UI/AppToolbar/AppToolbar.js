@@ -1,6 +1,9 @@
 import React from 'react';
 import {AppBar, Button, Grid, makeStyles, Toolbar, Typography} from "@material-ui/core";
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+import RegisteredUser from "./MenuUser/RegisteredUser";
+import Anon from "./MenuUser/Anon";
 
 const useStyles = makeStyles(theme => ({
   mainLink: {
@@ -17,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 
 const AppToolbar = () => {
   const classes = useStyles();
-
+  const user = useSelector(state => state.users.user)
   return (
     <>
       <AppBar position="fixed">
@@ -26,7 +29,11 @@ const AppToolbar = () => {
             <Typography variant="h6">
               <Link to="/" className={classes.mainLink}>Music BOX</Link>
             </Typography>
-            <Button component={Link} to="/register" color="inherit">Sign up</Button>
+            <Grid>
+              {
+                user ? <RegisteredUser user={user}/> : <Anon/>
+              }
+            </Grid>
           </Grid>
         </Toolbar>
       </AppBar>

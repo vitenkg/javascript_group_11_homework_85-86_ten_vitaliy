@@ -6,6 +6,7 @@ import {fetchTracks} from "../../store/Actions/mainActions";
 const useStyles = makeStyles({
     text: {
         marginLeft: "20px",
+        width: "70%",
     },
     margin: {
         marginBottom: "15px",
@@ -34,15 +35,14 @@ const Tracks = () => {
             <Grid container direction="column" spacing={2}>
                 <Grid item container justifyContent="space-between" alignItems="center">
                     <Grid item>
-                        <Typography
-                            variant="h4">{tracks && paramsURL.get('artist') ? paramsURL.get('artist') : "All"}</Typography>
-                        <Typography variant="h4">{tracks && (tracks.length> 0) ? tracks[0].album.name : Tracks}</Typography>
+                        <Typography variant="h4">{tracks && (paramsURL.get('artist')) ? paramsURL.get('artist') : "All"}</Typography>
+                        <Typography variant="h4">{tracks && (tracks.length> 0) ? tracks[0].album.name : "Tracks"}</Typography>
                     </Grid>
                     <Grid item>
                         <Button color="primary">Add Track</Button>
                     </Grid>
                 </Grid>
-            </Grid>
+
             {tracks && (
                 tracks.map((track, id) => (
                     <Paper
@@ -52,7 +52,7 @@ const Tracks = () => {
                         className={classes.margin}
                     >
                         <Grid container>
-                            <Grid>{id + 1}.</Grid>
+                            <Grid item>{id + 1}.</Grid>
                             <Grid item className={classes.text}>
                                 <Typography variant="body1">Название альбома: {track.name}</Typography>
                                 <Typography variant="body1">Длина трека: {track.lasting}</Typography>
@@ -61,6 +61,7 @@ const Tracks = () => {
                         </Grid>
                     </Paper>
                 )))}
+            </Grid>
         </>
     );
 };

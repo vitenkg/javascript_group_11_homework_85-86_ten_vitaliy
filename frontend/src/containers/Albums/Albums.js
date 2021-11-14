@@ -35,6 +35,7 @@ const Albums = () => {
             if (album.image) {
                 return apiURL + '/uploads/' + album.image;
             }
+            return album;
         })
     }
     return (
@@ -49,7 +50,7 @@ const Albums = () => {
                         <Button coloe="primary">Add Album</Button>
                     </Grid>
                 </Grid>
-            </Grid>
+
             {albums && (
                 albums.map((album, id) => (
                     <Paper
@@ -74,7 +75,8 @@ const Albums = () => {
                             </Grid>
                         </Grid>
                     </Paper>
-                )))};
+                )))}
+            </Grid>
         </>
     );
 };

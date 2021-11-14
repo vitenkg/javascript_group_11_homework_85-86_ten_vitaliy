@@ -21,7 +21,6 @@ const mainReducer = (state = initialState, action) => {
         case FETCH_MAIN_REQUEST:
             return {...state, fetchLoading: true};
         case FETCH_MAIN_SUCCESS:
-            console.log(action.payload);
             return {...state,  fetchLoading: false, artists: action.payload};
         case FETCH_MAIN_FAILURE:
             return {...state, fetchLoading: false};
