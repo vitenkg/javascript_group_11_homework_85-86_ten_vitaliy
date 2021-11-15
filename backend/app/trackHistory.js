@@ -18,8 +18,6 @@ router.get('/', auth, async (req, res) => {
 router.post('/', auth, async (req, res) => {
     const date = dayjs(new Date());
 
-    // const track = await Track.find({_id: req.body.track});
-
     const historyData = {
         datetime: date,
         track: req.body.track,

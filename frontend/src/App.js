@@ -5,6 +5,8 @@ import Login from "./containers/Login/Login";
 import Main from "./containers/Main/Main";
 import Albums from "./containers/Albums/Albums";
 import Tracks from "./containers/Tracks/Tracks";
+import History from "./containers/History/History";
+
 
 const App = () => (
     <Layout>
@@ -14,6 +16,7 @@ const App = () => (
             {/*<Route path="/products/:id" component={Product}/>*/}
             <Route path="/albums" component={Albums}/>
             <Route path="/tracks" component={Tracks}/>
+            <Route path="/track_history" component={History}/>
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
         </Switch>

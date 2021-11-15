@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Box, Button, Grid, makeStyles, Paper, Typography} from "@material-ui/core";
-import {fetchTracks} from "../../store/Actions/mainActions";
+import {createTrackHistory, fetchTracks} from "../../store/Actions/mainActions";
 import {Redirect} from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -34,6 +34,7 @@ const Tracks = () => {
 
     const buttonHandler = id => {
         console.log(id);
+        dispatch(createTrackHistory(token.token, id));
     };
 
     if (!token) {
