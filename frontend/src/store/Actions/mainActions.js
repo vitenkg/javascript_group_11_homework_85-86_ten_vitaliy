@@ -128,14 +128,12 @@ export const createTrackHistory = (token, track) => {
 export const fetchHistory = () => {
     return async (dispatch, getState) => {
         try {
-            console.log(getState().users.user.token);
             dispatch(fetchHistoryRequest());
             const response = await axiosApi.get('/track_history',{
                 headers: {
                     'Authorization': getState().users.user && getState().users.user.token,
                 },
             });
-            console.log(response.data);
             dispatch(fetchHistorySuccess(response.data));
         } catch (e) {
             dispatch(fetchHistoryFailure());

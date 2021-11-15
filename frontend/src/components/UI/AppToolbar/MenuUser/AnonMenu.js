@@ -2,7 +2,7 @@ import React from 'react';
 import {Button} from "@material-ui/core";
 import {Link} from "react-router-dom";
 
-const Anon = () => {
+const AnonMenu = () => {
     return (
         <>
             <Button component={Link} to="/register" color="inherit">Sign Up</Button>
@@ -11,4 +11,4 @@ const Anon = () => {
     );
 };
 
-export default Anon;
+export default AnonMenu;

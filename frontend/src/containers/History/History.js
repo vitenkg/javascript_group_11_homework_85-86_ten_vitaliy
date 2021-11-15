@@ -22,7 +22,6 @@ const History = () => {
         dispatch(fetchHistory());
     }, [dispatch]);
 
-    console.log(trackHistory);
 
     return (
         <Grid container direction="column" spacing={2}>

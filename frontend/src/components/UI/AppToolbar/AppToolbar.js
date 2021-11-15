@@ -2,8 +2,8 @@ import React from 'react';
 import {AppBar, Grid, makeStyles, Toolbar, Typography} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
-import RegisteredUser from "./MenuUser/RegisteredUser";
-import Anon from "./MenuUser/Anon";
+import UserMenu from "./MenuUser/UserMenu";
+import AnonMenu from "./MenuUser/AnonMenu";
 
 const useStyles = makeStyles(theme => ({
   mainLink: {
@@ -31,7 +31,7 @@ const AppToolbar = () => {
             </Typography>
             <Grid>
               {
-                user ? <RegisteredUser user={user}/> : <Anon/>
+                user ? <UserMenu user={user}/> : <AnonMenu/>
               }
             </Grid>
           </Grid>
