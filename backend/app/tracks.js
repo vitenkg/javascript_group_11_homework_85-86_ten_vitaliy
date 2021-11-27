@@ -39,6 +39,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+    console.log(req.body);
     if (!req.body.name || !req.body.album) {
         return res.status(400).send('Data Not valid');
     }
@@ -46,9 +47,10 @@ router.post('/', async (req, res) => {
     const trackData = {
         name: req.body.name,
         album: req.body.album,
+        artist: req.body.artist,
+        trackNumber: parseInt(req.body.trackNumber),
         lasting: req.body.lasting || null
-    }
-
+    };
 
     const track = new Track(trackData);
     try {

@@ -20,7 +20,15 @@ const upload = multer({storage});
 
 router.get('/', async (req, res) => {
   try {
-    const artists = await Artist.find();
+    if (req.query.name) {
+      const artistName = await Artist.find().sort({'name': 1});
+      const artists = artistName.map(artist => {
+          return artist.name
+      });
+      return res.send(artists);
+    }
+
+    const artists = await Artist.find().sort({'name': 1});
     res.send(artists);
   } catch (e) {
     res.sendStatus(500);

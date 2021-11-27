@@ -17,7 +17,13 @@ const TrackSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Artist',
         required: true
-    }
+    },
+    publish: {
+        type: Boolean,
+        required: true,
+        default: false,
+        enum: [true, false],
+    },
 
 });
 

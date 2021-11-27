@@ -12,7 +12,13 @@ const AlbumSchema = new mongoose.Schema({
     required: true
   },
   year: String,
-  image: String
+  image: String,
+  publish: {
+    type: Boolean,
+    required: true,
+    default: false,
+    enum: [true, false],
+  },
 });
 
 AlbumSchema.plugin(idValidator);
