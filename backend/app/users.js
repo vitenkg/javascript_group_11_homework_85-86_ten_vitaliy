@@ -26,21 +26,26 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/sessions', async (req, res) => {
-    const user = await User.findOne({username: req.body.username});
+    try {
+        const user = await User.findOne({username: req.body.username});
 
-    if (!user) {
-        return res.status(401).send({message: "Something went wrong"});
+        if (!user) {
+            return res.status(401).send({message: "Something went wrong"});
+        }
+
+        const isMatch = await user.checkPassword(req.body.password);
+
+        if (!isMatch) {
+            return res.status(401).send({message: "Something went wrong"});
+        }
+
+        user.generateToken();
+        await user.save({validateBeforeSave: false});
+        res.send({message: "Username and password correct", user});
+    } catch (e) {
+        res.status(500).send(e);
     }
 
-    const isMatch = await user.checkPassword(req.body.password);
-
-    if (!isMatch) {
-        return res.status(401).send({message: "Something went wrong"});
-    }
-
-    user.generateToken();
-    await user.save({validateBeforeSave: false});
-    res.send({message: "Username and password correct", user});
 });
 
 router.delete('/sessions', async (req, res) => {
@@ -52,7 +57,7 @@ router.delete('/sessions', async (req, res) => {
        await user.save({validateBeforeSave: false});
        res.send(success);
    } catch (e) {
-
+       res.status(500).send(e);
    }
 });
 

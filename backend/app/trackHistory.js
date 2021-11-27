@@ -7,7 +7,6 @@ const router = express.Router();
 
 router.get('/', auth, async (req, res) => {
     const history = await History.find(req.user._id).populate('track', 'name').populate('artist', 'name').sort({datetime: -1});
-    console.log(history);
     try {
         res.send(history);
     } catch (e) {
@@ -16,6 +15,9 @@ router.get('/', auth, async (req, res) => {
 })
 
 router.post('/', auth, async (req, res) => {
+    if (!req.body.artist || !req.body.track) {
+        return res.status(400).send('Data Not valid');
+    }
     const date = dayjs(new Date());
     const historyData = {
         datetime: date,
@@ -23,7 +25,6 @@ router.post('/', auth, async (req, res) => {
         artist: req.body.artist,
         user: req.user._id,
     }
-    console.log(historyData);
 
     const history = new History(historyData);
 
@@ -37,7 +38,6 @@ router.post('/', auth, async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-    console.log(req.params.id);
     try {
         await History.findByIdAndDelete(req.params.id);
         res.send('was deleted');
