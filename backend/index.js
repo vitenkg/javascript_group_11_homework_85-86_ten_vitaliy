@@ -20,7 +20,7 @@ app.use('/artists', artists);
 app.use('/albums', albums);
 app.use('/tracks', tracks);
 app.use('/users', Users);
-app.use('/track_history', TrackHistory);
+app.use('/tracks_history', TrackHistory);
 
 
 const run = async () => {
