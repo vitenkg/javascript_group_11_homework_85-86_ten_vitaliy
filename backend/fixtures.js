@@ -92,63 +92,99 @@ const run = async () => {
     await Track.create({
         name: "Heartbreaker",
         lasting: "4:46",
+        trackNumber: 1,
         album: Rainbow,
         artist: MariahCarey,
     }, {
         name: "Crybaby",
         lasting: "5:20",
+        trackNumber: 10,
         album: Rainbow,
         artist: MariahCarey,
     }, {
         name: "Lead the Way",
         lasting: "3:53",
+        trackNumber: 2,
         album: Glitter,
         artist: MariahCarey,
     }, {
         name: "Didn’t Mean to Turn You On",
         lasting: "4:54",
+        trackNumber: 4,
         album: Glitter,
         artist: MariahCarey,
     }, {
         name: "Girlfriend",
         lasting: "3:34",
+        trackNumber: 2,
         album: SongsinAMinor,
         artist: AliciaKeys,
     }, {
         name: "A Woman's Worth",
         lasting: "5:03",
+        trackNumber: 7,
         album: SongsinAMinor,
         artist: AliciaKeys,
     }, {
         name: "Karma",
         lasting: "4:16",
+        trackNumber: 2,
         album: TheDiaryofAliciaKeys,
         artist: AliciaKeys,
     }, {
         name: "Heartburn",
         lasting: "3:28",
+        trackNumber: 3,
         album: TheDiaryofAliciaKeys,
         artist: AliciaKeys,
     }, {
         name: "No, No, No Part 1",
         lasting: "4:00",
+        trackNumber: 6,
         album: DestinysChildAlbum,
         artist: DestinysChild,
     }, {
         name: "Show Me the Way",
         lasting: "4:20",
+        trackNumber: 8,
         album: DestinysChildAlbum,
         artist: DestinysChild,
     }, {
         name: "Survivor",
         lasting: "4:14",
+        trackNumber: 2,
         album: Survivor,
         artist: DestinysChild,
     }, {
         name: "Nasty Girl",
         lasting: "4:18",
+        trackNumber: 4,
         album: Survivor,
         artist: DestinysChild,
+    },{
+        name: "You Make Me Laugh",
+        lasting: "3:37",
+        trackNumber: 6,
+        album: ChristinaMilianAlbum,
+        artist: ChristinaMilian,
+    }, {
+        name: "Satisfaction Guaranteed",
+        lasting: "3:45",
+        trackNumber: 10,
+        album: ChristinaMilianAlbum,
+        artist: ChristinaMilian,
+    }, {
+        name: "Dip It Low",
+        lasting: "3:38",
+        trackNumber: 2,
+        album: ItsAboutTime,
+        artist: ChristinaMilian,
+    }, {
+        name: "Miss You Like Crazy",
+        lasting: "4:49",
+        trackNumber: 11,
+        album: ItsAboutTime,
+        artist: ChristinaMilian,
     },);
 
     await mongoose.connection.close();

@@ -7,6 +7,7 @@ const TrackSchema = new mongoose.Schema({
         required: true
     },
     lasting: String,
+    trackNumber: Number,
     album: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Album',
