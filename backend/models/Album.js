@@ -13,6 +13,11 @@ const AlbumSchema = new mongoose.Schema({
   },
   year: String,
   image: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
   publish: {
     type: Boolean,
     required: true,

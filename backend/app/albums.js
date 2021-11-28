@@ -7,6 +7,7 @@ const Artist = require('../models/Artist');
 const Track = require('../models/Track');
 const config = require('../config');
 const {Promise} = require("mongoose");
+const auth = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -50,7 +51,7 @@ router.get('/:id', async (req, res) => {
 });
 
 
-router.post('/', upload.single('image'), async (req, res) => {
+router.post('/', auth, upload.single('image'), async (req, res) => {
     if (!req.body.name || !req.body.artist) {
         return res.status(400).send('Data Not valid');
     }
@@ -58,7 +59,8 @@ router.post('/', upload.single('image'), async (req, res) => {
     const albumData = {
         name: req.body.name,
         artist: req.body.artist,
-        year: req.body.year || null
+        year: req.body.year || null,
+        user: req.user._id,
     }
 
     if (req.file) {
